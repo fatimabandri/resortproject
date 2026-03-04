@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header text-center bg-dark text-white rounded-top-4">
+                    <h3>🏨 Book Your Stay</h3>
+                </div>
+
+                <div class="card-body p-4">
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Full Name</label>
+                                <input type="text" name="guest_name" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Room Type</label>
+                            <select name="room_type" class="form-select" required>
+                                <option value="">Select Room</option>
+                                <option>Deluxe Room</option>
+                                <option>Super Deluxe</option>
+                                <option>Suite</option>
+                                <option>Family Room</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Check-In</label>
+                                <input type="date" name="check_in" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Check-Out</label>
+                                <input type="date" name="check_out" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Number of Guests</label>
+                            <input type="number" name="guests" class="form-control" min="1" required>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark btn-lg px-5 rounded-pill">
+                                Confirm Booking
+                            </button>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Select Room</label>
+                            <select name="room" class="form-select" required>
+                                <option value="">Select Available Room</option>
+                                {% for room in rooms %}
+                                <option value="{{ room.id }}">
+                                    Room {{ room.room_number }} - ₹{{ room.price }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

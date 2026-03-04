@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Kitchen Dashboard</h2>
+
+    <div class="row text-center mb-4">
+        <div class="col-md-4">
+            <div class="card bg-warning text-white p-3">
+                <h4>Pending</h4>
+                <h2>{{ pending_count }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white p-3">
+                <h4>Preparing</h4>
+                <h2>{{ preparing_count }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white p-3">
+                <h4>Completed</h4>
+                <h2>{{ completed_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Pending -->
+        <div class="col-md-4">
+            <h5 class="text-warning">Pending Orders</h5>
+            {% for order in pending_orders %}
+            <div class="card mb-3 shadow">
+                <div class="card-body">
+                    <strong>Table:</strong> {{ order.order.table_number }}<br>
+                    <strong>Item:</strong> {{ order.order.item_name }}<br>
+                    <strong>Qty:</strong> {{ order.order.quantity }}<br><br>
+                    <a href="{% url 'update_kitchen_status' order.id 'Preparing' %}" class="btn btn-sm btn-primary">
+                        Start Preparing
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No pending orders</p>
+            {% endfor %}
+        </div>
+
+        <!-- Preparing -->
+        <div class="col-md-4">
+            <h5 class="text-info">Preparing Orders</h5>
+            {% for order in preparing_orders %}
+            <div class="card mb-3 shadow">
+                <div class="card-body">
+                    <strong>Table:</strong> {{ order.order.table_number }}<br>
+                    <strong>Item:</strong> {{ order.order.item_name }}<br>
+                    <strong>Qty:</strong> {{ order.order.quantity }}<br><br>
+                    <a href="{% url 'update_kitchen_status' order.id 'Completed' %}" class="btn btn-sm btn-success">
+                        Mark Completed
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No preparing orders</p>
+            {% endfor %}
+        </div>
+
+        <!-- Completed -->
+        <div class="col-md-4">
+            <h5 class="text-success">Completed Orders</h5>
+            {% for order in completed_orders %}
+            <div class="card mb-3 shadow bg-light">
+                <div class="card-body">
+                    <strong>Table:</strong> {{ order.order.table_number }}<br>
+                    <strong>Item:</strong> {{ order.order.item_name }}<br>
+                    <strong>Qty:</strong> {{ order.order.quantity }}<br>
+                    <span class="badge bg-success mt-2">Completed</span>
+                </div>
+            </div>
+            {% empty %}
+            <p>No completed orders</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
