@@ -1,29 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2 class="text-center mb-5">Resort Dashboard</h2>
+<div class="container mt-5">
 
-<div class="row text-center">
+    <h2 class="text-center mb-4">Resort Admin Dashboard</h2>
 
-    <div class="col-md-4">
-        <div class="card p-4">
-            <h3>Total Rooms</h3>
-            <h2>{{ total_rooms }}</h2>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white p-4">
+                <h4>Total Rooms</h4>
+                <h2>{{ total_rooms }}</h2>
+            </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white p-4">
+                <h4>Available Rooms</h4>
+                <h2>{{ available_rooms }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-danger text-white p-4">
+                <h4>Booked Rooms</h4>
+                <h2>{{ booked_rooms }}</h2>
+            </div>
+        </div>
+
     </div>
 
-    <div class="col-md-4">
-        <div class="card p-4">
-            <h3>Booked Rooms</h3>
-            <h2>{{ booked_rooms }}</h2>
-        </div>
-    </div>
+    <br>
 
-    <div class="col-md-4">
-        <div class="card p-4">
-            <h3>Available Rooms</h3>
-            <h2>{{ available_rooms }}</h2>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card bg-warning text-white p-4">
+                <h4>Total Bookings</h4>
+                <h2>{{ total_bookings }}</h2>
+            </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="card bg-dark text-white p-4">
+                <h4>Total Revenue</h4>
+                <h2>₹ {{ total_revenue }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white p-4">
+                <h4>Restaurant Orders</h4>
+                <h2>{{ restaurant_orders }}</h2>
+            </div>
+        </div>
+
     </div>
 
 </div>

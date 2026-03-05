@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('kitchen-dashboard/', views.kitchen_dashboard, name='kitchen_dashboard'),
     path('update-kitchen-status/<int:id>/<str:status>/', views.update_kitchen_status, name='update_kitchen_status'),
-    path('dashboard/', views.dashboard, name='dashboard'),
     path('contact/', views.contact, name='contact'),
+    path('', include('resortapp.urls')),
     
 ]

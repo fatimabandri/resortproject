@@ -167,3 +167,31 @@ def cancel_booking(request, id):
 
     booking.delete()
     return redirect('booking_history')
+
+
+def dashboard(request):
+
+    total_rooms = Room.objects.count()
+
+    available_rooms = Room.objects.filter(status="Available").count()
+
+    booked_rooms = Room.objects.filter(status="Booked").count()
+
+    total_bookings = Booking.objects.count()
+
+    total_revenue = Booking.objects.aggregate(
+        Sum('total_amount')
+    )['total_amount__sum'] or 0
+
+    restaurant_orders = RestaurantOrder.objects.count()
+
+    context = {
+        'total_rooms': total_rooms,
+        'available_rooms': available_rooms,
+        'booked_rooms': booked_rooms,
+        'total_bookings': total_bookings,
+        'total_revenue': total_revenue,
+        'restaurant_orders': restaurant_orders,
+    }
+
+    return render(request, "dashboard.html", context)
